@@ -9,7 +9,6 @@ import asyncio
 
 
 @borg.on(admin_cmd(pattern="cry"))
-
 async def _(event):
 
     if event.fwd_from:
@@ -17,13 +16,13 @@ async def _(event):
         return
 
     animation_interval = 1
-    
 
-    animation_ttl = range(0, 103)
 
-    
+    animation_ttl = range(103)
 
-  
+        
+
+      
 
     await event.edit("crying")
 

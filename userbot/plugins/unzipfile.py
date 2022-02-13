@@ -3,6 +3,7 @@ coded by @By_Azade
 code rewritten my SnapDragon7410
 """
 
+
 import asyncio
 import os
 import time
@@ -19,7 +20,7 @@ from hachoir.parser import createParser
 from zipfile import ZipFile
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
-extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
+extracted = f'{Config.TMP_DOWNLOAD_DIRECTORY}extracted/'
 if not os.path.isdir(extracted):
     os.makedirs(extracted)
 
@@ -39,7 +40,7 @@ async def _(event):
             downloaded_file_name = await borg.download_media(
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
-                
+
             )
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
@@ -63,11 +64,9 @@ async def _(event):
                 document_attributes = []
                 if single_file.endswith((".mp4", ".mp3", ".flac", ".webm")):
                     metadata = extractMetadata(createParser(single_file))
-                    duration = 0
                     width = 0
                     height = 0
-                    if metadata.has("duration"):
-                        duration = metadata.get('duration').seconds
+                    duration = metadata.get('duration').seconds if metadata.has("duration") else 0
                     if os.path.exists(thumb_image_path):
                         metadata = extractMetadata(createParser(thumb_image_path))
                         if metadata.has("width"):

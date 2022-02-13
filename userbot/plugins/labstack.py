@@ -31,11 +31,15 @@ async def labstack(event):
     max_days = 7
     command_to_exec = [
         "curl",
-        "-F", "files=@" + filebase,
-        "-H","Transfer-Encoding: chunked",
-        "-H","Up-User-ID: IZfFbjUcgoo3Ao3m",
-        url
+        "-F",
+        f'files=@{filebase}',
+        "-H",
+        "Transfer-Encoding: chunked",
+        "-H",
+        "Up-User-ID: IZfFbjUcgoo3Ao3m",
+        url,
     ]
+
     try:
         logger.info(command_to_exec)
         t_response = subprocess.check_output(command_to_exec, stderr=subprocess.STDOUT)

@@ -115,9 +115,9 @@ async def _(event):
     afk_time = None
     last_afk_message = {}
     afk_end = {}
-    start_1 = datetime.now()
-    afk_start = start_1.replace(microsecond=0)
     if not USERAFK_ON:
+        start_1 = datetime.now()
+        afk_start = start_1.replace(microsecond=0)
         reason = event.pattern_match.group(1)
         last_seen_status = await borg(
             functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
@@ -130,7 +130,7 @@ async def _(event):
                 event.chat_id, f"**நான் Offline செல்கிறேன்!** __ஏனெனில்,  {reason}__"
             )
         else:
-            await borg.send_message(event.chat_id, f"**நான் Offline செல்கிறேன்!**")
+            await borg.send_message(event.chat_id, '**நான் Offline செல்கிறேன்!**')
         await asyncio.sleep(5)
         await event.delete()
         if BOTLOG:

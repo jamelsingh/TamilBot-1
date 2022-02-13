@@ -11,7 +11,6 @@ from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"music"))
-
 async def _(event):
 
     if event.fwd_from:
@@ -20,10 +19,8 @@ async def _(event):
 
     animation_interval = 1.5
 
-    animation_ttl = range(0, 11)
-
+    animation_ttl = range(11)
    # input_str = event.pattern_match.group(1)
-
    # if input_str == "music":
 
     await event.edit("music")

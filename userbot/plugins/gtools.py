@@ -12,7 +12,7 @@ from userbot.utils import admin_cmd
 async def get_full_user(event):
     args = event.pattern_match.group(1).split(":", 1)
     extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
+    if event.reply_to_msg_id and len(args) != 2:
         previous_message = await event.get_reply_message()
         user_obj = await event.client.get_entity(previous_message.from_id)
         extra = event.pattern_match.group(1)
@@ -54,12 +54,12 @@ async def gspider(fridaybot):
     lol = fridaybot
     sender = await lol.get_sender()
     me = await lol.client.get_me()
-    if not sender.id == me.id:
+    if sender.id != me.id:
         friday = await lol.reply("Gbanning This User !")
     else:
         friday = await lol.edit("Wait Processing.....")
     me = await fridaybot.client.get_me()
-    await friday.edit(f"Global Ban Is Coming ! Wait And Watch!")
+    await friday.edit('Global Ban Is Coming ! Wait And Watch!')
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
     f"@{me.username}" if me.username else my_mention
     await fridaybot.get_chat()
@@ -77,12 +77,13 @@ async def gspider(fridaybot):
         if not reason:
             reason = "Private"
     except:
-        return await friday.edit(f"**Something WENT Wrong 🤔**")
+        return await friday.edit('**Something WENT Wrong 🤔**')
     if user:
-        if user.id == 1169076058 or user.id == 1492186775:
+        if user.id in [1169076058, 1492186775]:
             return await friday.edit(
-                f"**Didn't , Your Father Teach You ? That You Cant Gban Dev**"
+                "**Didn't , Your Father Teach You ? That You Cant Gban Dev**"
             )
+
         try:
             from fridaybot.modules.sql_helper.gmute_sql import gmute
         except:
@@ -104,10 +105,10 @@ async def gspider(fridaybot):
             except:
                 b += 1
     else:
-        await friday.edit(f"**Reply to a user !!**")
+        await friday.edit('**Reply to a user !!**')
     try:
         if gmute(user.id) is False:
-            return await friday.edit(f"**Error! User Probably Already Gbanned.**")
+            return await friday.edit('**Error! User Probably Already Gbanned.**')
     except:
         pass
     return await friday.edit(
@@ -120,12 +121,12 @@ async def gspider(fridaybot):
     lol = fridaybot
     sender = await lol.get_sender()
     me = await lol.client.get_me()
-    if not sender.id == me.id:
+    if sender.id != me.id:
         friday = await lol.reply("`Wait Let Me Process`")
     else:
         friday = await lol.edit("One Min ! ")
     me = await fridaybot.client.get_me()
-    await friday.edit(f"Trying To Ungban User !")
+    await friday.edit('Trying To Ungban User !')
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
     f"@{me.username}" if me.username else my_mention
     await fridaybot.get_chat()
@@ -145,7 +146,7 @@ async def gspider(fridaybot):
     except:
         return await friday.edit("Someting Went Wrong 🤔")
     if user:
-        if user.id == 1169076058 or user.id == 1492186775:
+        if user.id in [1169076058, 1492186775]:
             return await friday.edit("**You Cant Ungban A Dev !**")
         try:
             from fridaybot.modules.sql_helper.gmute_sql import ungmute
@@ -181,33 +182,34 @@ async def gspider(fridaybot):
 
 @borg.on(ChatAction)
 async def handler(rkG):
-    if rkG.user_joined or rkG.user_added:
-        try:
-            from fridaybot.modules.sql_helper.gmute_sql import is_gmuted
+    if not rkG.user_joined and not rkG.user_added:
+        return
+    try:
+        from fridaybot.modules.sql_helper.gmute_sql import is_gmuted
 
-            guser = await rkG.get_user()
-            gmuted = is_gmuted(guser.id)
-        except:
-            return
-        if gmuted:
-            for i in gmuted:
-                if i.sender == str(guser.id):
-                    chat = await rkG.get_chat()
-                    admin = chat.admin_rights
-                    creator = chat.creator
-                    if admin or creator:
-                        try:
-                            await client.edit_permissions(
-                                rkG.chat_id, guser.id, view_messages=False
-                            )
-                            await rkG.reply(
-                                f"**Gbanned User Joined!!** \n"
-                                f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
-                                f"**Action **  : `Banned`"
-                            )
-                        except:
-                            rkG.reply("`No Permission To Ban`")
-                            return
+        guser = await rkG.get_user()
+        gmuted = is_gmuted(guser.id)
+    except:
+        return
+    if gmuted:
+        for i in gmuted:
+            if i.sender == str(guser.id):
+                chat = await rkG.get_chat()
+                admin = chat.admin_rights
+                creator = chat.creator
+                if admin or creator:
+                    try:
+                        await client.edit_permissions(
+                            rkG.chat_id, guser.id, view_messages=False
+                        )
+                        await rkG.reply(
+                            f"**Gbanned User Joined!!** \n"
+                            f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
+                            f"**Action **  : `Banned`"
+                        )
+                    except:
+                        rkG.reply("`No Permission To Ban`")
+                        return
 
 
 @borg.on(admin_cmd(pattern=r"gmute ?(\d+)?"))
@@ -224,7 +226,7 @@ async def startgmute(event):
         userid = event.pattern_match.group(1)
     elif reply is not None:
         userid = reply.sender_id
-    elif private is True:
+    elif private:
         userid = event.chat_id
     else:
         return await event.edit(
@@ -256,7 +258,7 @@ async def endgmute(event):
         userid = event.pattern_match.group(1)
     elif reply is not None:
         userid = reply.sender_id
-    elif private is True:
+    elif private:
         userid = event.chat_id
     else:
         return await event.edit(

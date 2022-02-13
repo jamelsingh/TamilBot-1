@@ -12,7 +12,7 @@ async def _(event):
     # https://t.me/AnotherGroup/176551
     input_str = event.pattern_match.group(1)
     shiiinabot = "\u2060"
-    for i in range(601):
+    for _ in range(601):
         shiiinabot += "\u2060"
     try:
         await event.edit(shiiinabot)
@@ -25,16 +25,14 @@ async def _(event):
     await asyncio.sleep(DELAY_BETWEEN_EDITS)
     for character in input_str:
         previous_text = previous_text + "" + character
-        typing_text = previous_text + "" + typing_symbol
+        typing_text = f'{previous_text}{typing_symbol}'
         try:
             await event.edit(typing_text)
         except Exception as e:
             logger.warn(str(e))
-            pass
         await asyncio.sleep(DELAY_BETWEEN_EDITS)
         try:
             await event.edit(previous_text)
         except Exception as e:
             logger.warn(str(e))
-            pass
         await asyncio.sleep(DELAY_BETWEEN_EDITS)

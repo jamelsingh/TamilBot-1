@@ -37,15 +37,14 @@ async def _(event):
         await event.edit("Reply to a photo to add to my personal sticker pack.")
         return
     reply_message = await event.get_reply_message()
-    sticker_emoji = "🔥"
-    input_str = event.pattern_match.group(1)
-    if input_str:
-        sticker_emoji = input_str
+    sticker_emoji = (
+        input_str if (input_str := event.pattern_match.group(1)) else "🔥"
+    )
 
     me = borg.me
     userid = event.from_id
-    packname = f"Tamil_Stickers"
-    packshortname = f"Tamil_stickers"  # format: Uni_Borg_userid
+    packname = 'Tamil_Stickers'
+    packshortname = 'Tamil_stickers'
 
     is_a_s = is_it_animated_sticker(reply_message)
     file_ext_ns_ion = "@UniBorg_Sticker.png"
@@ -54,11 +53,8 @@ async def _(event):
     if is_a_s:
         file_ext_ns_ion = "AnimatedSticker.tgs"
         uploaded_sticker = await borg.upload_file(file, file_name=file_ext_ns_ion)
-        packname = f"Tamil_Animated"
-        if userid == 719877937:
-            packshortname = "Tamil_Animated"
-        else:
-            packshortname = f"Tamil_Animated" # format: Uni_Borg_userid
+        packname = 'Tamil_Animated'
+        packshortname = 'Tamil_Animated'
     elif not is_message_image(reply_message):
         await event.edit("Invalid message type")
         return
@@ -131,10 +127,7 @@ def is_it_animated_sticker(message):
     try:
         if message.media and message.media.document:
             mime_type = message.media.document.mime_type
-            if "tgsticker" in mime_type:
-                return True
-            else:
-                return False
+            return "tgsticker" in mime_type
         else:
             return False
     except:
@@ -145,9 +138,11 @@ def is_message_image(message):
     if message.media:
         if isinstance(message.media, MessageMediaPhoto):
             return True
-        if message.media.document:
-            if message.media.document.mime_type.split("/")[0] == "image":
-                return True
+        if (
+            message.media.document
+            and message.media.document.mime_type.split("/")[0] == "image"
+        ):
+            return True
         return False
     return False
 
@@ -177,7 +172,6 @@ def resize_image(image, save_locaton):
         https://github.com/skittles9823/SkittBot/blob/master/tg_bot/modules/stickers.py
     """
     im = Image.open(image)
-    maxsize = (512, 512)
     if (im.width and im.height) < 512:
         size1 = im.width
         size2 = im.height
@@ -194,6 +188,7 @@ def resize_image(image, save_locaton):
         sizenew = (size1new, size2new)
         im = im.resize(sizenew)
     else:
+        maxsize = (512, 512)
         im.thumbnail(maxsize)
     im.save(save_locaton, "PNG")
 
@@ -203,10 +198,7 @@ def progress(current, total):
 
 
 def find_instance(items, class_or_tuple):
-    for item in items:
-        if isinstance(item, class_or_tuple):
-            return item
-    return None
+    return next((item for item in items if isinstance(item, class_or_tuple)), None)
 
 
 def zipdir(path, ziph):

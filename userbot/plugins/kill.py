@@ -9,7 +9,6 @@ from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="kill"))
-
 async def _(event):
 
     if event.fwd_from:
@@ -17,9 +16,9 @@ async def _(event):
         return
 
     animation_interval = 2
-    
 
-    animation_ttl = range(0, 12)
+
+    animation_ttl = range(12)
 
     #input_str = event.pattern_match.group(1)
 

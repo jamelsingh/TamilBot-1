@@ -4,6 +4,7 @@ Available Commands:
 .clearthumbnail
 .getthumbnail"""
 
+
 import os
 import subprocess
 from hachoir.metadata import extractMetadata
@@ -13,11 +14,11 @@ from telethon import events
 from uniborg.util import admin_cmd
 
 
-thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
+thumb_image_path = f'{Config.TMP_DOWNLOAD_DIRECTORY}/thumb_image.jpg'
 
 
 def get_video_thumb(file, output=None, width=320):
-    output = file + ".jpg"
+    output = f'{file}.jpg'
     metadata = extractMetadata(createParser(file))
     p = subprocess.Popen([
         'ffmpeg', '-i', file,
@@ -49,9 +50,7 @@ async def _(event):
                 downloaded_file_name
             )
         metadata = extractMetadata(createParser(downloaded_file_name))
-        height = 0
-        if metadata.has("height"):
-            height = metadata.get("height")
+        height = metadata.get("height") if metadata.has("height") else 0
         # resize image
         # ref: https://t.me/PyrogramChat/44663
         # https://stackoverflow.com/a/21669827/4723940
