@@ -12,38 +12,38 @@ from uniborg.util import admin_cmd
 @borg.on(admin_cmd(pattern=r"meme"))
 async def meme(event):
     if event.fwd_from:
-        return   
+        return
     memeVar = event.text
     sleepValue = 3
     memeVar = memeVar[6:] 
-           
-    await event.edit("-------------"+memeVar)
+
+    await event.edit(f'-------------{memeVar}')
     await asyncio.sleep(sleepValue)
-    await event.edit("------------"+memeVar+"-")
+    await event.edit(f'------------{memeVar}-')
     await asyncio.sleep(sleepValue)
-    await event.edit("-----------"+memeVar+"--")
+    await event.edit(f'-----------{memeVar}--')
     await asyncio.sleep(sleepValue)
-    await event.edit("----------"+memeVar+"---")
+    await event.edit(f'----------{memeVar}---')
     await asyncio.sleep(sleepValue)
-    await event.edit("---------"+memeVar+"----")   
-    await asyncio.sleep(sleepValue) 
-    await event.edit("--------"+memeVar+"-----")
+    await event.edit(f'---------{memeVar}----')
     await asyncio.sleep(sleepValue)
-    await event.edit("-------"+memeVar+"------")
+    await event.edit(f'--------{memeVar}-----')
     await asyncio.sleep(sleepValue)
-    await event.edit("------"+memeVar+"-------")
+    await event.edit(f'-------{memeVar}------')
     await asyncio.sleep(sleepValue)
-    await event.edit("-----"+memeVar+"--------")
+    await event.edit(f'------{memeVar}-------')
     await asyncio.sleep(sleepValue)
-    await event.edit("----"+memeVar+"---------")
+    await event.edit(f'-----{memeVar}--------')
     await asyncio.sleep(sleepValue)
-    await event.edit("---"+memeVar+"----------")
+    await event.edit(f'----{memeVar}---------')
     await asyncio.sleep(sleepValue)
-    await event.edit("--"+memeVar+"-----------")
+    await event.edit(f'---{memeVar}----------')
     await asyncio.sleep(sleepValue)
-    await event.edit("-"+memeVar+"------------")
+    await event.edit(f'--{memeVar}-----------')
     await asyncio.sleep(sleepValue)
-    await event.edit(memeVar+"-------------")
+    await event.edit(f'-{memeVar}------------')
+    await asyncio.sleep(sleepValue)
+    await event.edit(f'{memeVar}-------------')
     await asyncio.sleep(sleepValue)
     await event.edit(memeVar)
     await asyncio.sleep(sleepValue)
@@ -55,11 +55,11 @@ usage:- .flower
 @borg.on(admin_cmd(pattern=r"flower"))
 async def meme(event):
     if event.fwd_from:
-        return   
+        return
     flower =" 🌹"
     sleepValue = 5
-           
-    await event.edit(flower+"        ")
+
+    await event.edit(f'{flower}        ')
     await asyncio.sleep(sleepValue)
     await event.edit(flower+flower+"       ")
     await asyncio.sleep(sleepValue)

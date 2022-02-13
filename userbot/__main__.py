@@ -36,7 +36,7 @@ else:
         print("Startup Completed")
     else:
         bot.start()
-    
+
 
 import glob
 path = 'userbot/plugins/*.py'
@@ -50,7 +50,8 @@ for name in files:
 
 print("ஆம்! உங்கள் பயனர் போட் அதிகாரப்பூர்வமாக செயல்படுகிறது 🥳.")
 
-if len(argv) not in (1, 3, 4):
-    bot.disconnect()
-else:
+if len(argv) in {1, 3, 4}:
     bot.run_until_disconnected()
+
+else:
+    bot.disconnect()

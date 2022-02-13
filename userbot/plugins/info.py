@@ -75,8 +75,7 @@ async def _(event):
 
 
 async def get_full_user(event):
-    input_str = event.pattern_match.group(1)
-    if input_str:
+    if input_str := event.pattern_match.group(1):
         try:
             try:
                 input_str = int(input_str)
@@ -219,7 +218,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b>🌐 Is Verified by Telegram:</b> {verified}\n\n"
     caption += f"<b>✍️ Bio:</b> \n<code>{user_bio}</code>\n\n"
     caption += f"<b>👥 Common Chats with this user:</b> {common_chat}\n"
-    caption += f"<b>🔗 Permanent Link To Profile:</b> "
+    caption += '<b>🔗 Permanent Link To Profile:</b> '
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
     return photo, caption
 

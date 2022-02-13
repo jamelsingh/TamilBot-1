@@ -15,8 +15,8 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
-    animation_ttl = range(0, 288)
-    
+    animation_ttl = range(288)
+
     animation_chars = [
             "THINKING",
             "THI&K#N₹",
@@ -57,6 +57,6 @@ async def _(event):
         ]
 
     for i in animation_ttl:
-        	
+
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 72])

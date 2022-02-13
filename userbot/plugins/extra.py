@@ -22,19 +22,17 @@ async def leave(e):
             await e.edit('`இது ஒரு குழு அல்ல`')
 
 @borg.on(admin_cmd("hm"))
-#@register(outgoing=True, pattern="^;__;$")
 async def fun(e):
     t = ";__;"
-    for j in range(10):
-        t = t[:-1] + "_;"
+    for _ in range(10):
+        t = f'{t[:-1]}_;'
         await e.edit(t)
 
 @borg.on(admin_cmd("oof"))
-#@register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
     t = "Oof"
-    for j in range(15):
-        t = t[:-1] + "of"
+    for _ in range(15):
+        t = f'{t[:-1]}of'
         await e.edit(t)
 
 @borg.on(admin_cmd("ccry"))

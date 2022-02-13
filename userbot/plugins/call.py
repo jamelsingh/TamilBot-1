@@ -14,7 +14,6 @@ from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"call"))
-
 async def _(event):
 
     if event.fwd_from:
@@ -23,16 +22,14 @@ async def _(event):
 
     animation_interval = 3
 
-    animation_ttl = range(0, 18)
-
+    animation_ttl = range(18)
    # input_str = event.pattern_match.group(1)
-
    # if input_str == "call":
 
     await event.edit("Calling")
 
     animation_chars = [
-        
+
             "`தந்தி தலைமையகத்துடன் இணைக்கிறது ...`",
             "`அழைப்பு இணைக்கப்பட்டுள்ளது.`",
             "`Telegram: வணக்கம் இது தந்தி தலைமையகம். இது யார்?`",

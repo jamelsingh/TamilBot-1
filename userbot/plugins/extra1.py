@@ -15,16 +15,11 @@ from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"(power*)"))
-
 async def _(event):
 
     if event.fwd_from:
 
         return
-
-    animation_interval = 5
-
-    animation_ttl = range(0, 11)
 
     input_str = event.pattern_match.group(1)
 
@@ -33,7 +28,7 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = [
-        
+
             "`என்னைப் பற்றி😏`",
             "`Let's Know About Me 😎`",
             "`பின்னாலிருந்து ஒருவனால் நீ விமர்சிக்கப்பட்டால்,\n\n\nநினைத்துக்கொள்\nநீ அவனை விட ஏதோ ஒன்றில்\n\nமுன்னாடி இருக்கிறாய் என்று..!\n\n 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
@@ -47,6 +42,10 @@ async def _(event):
             "`பின்னாலிருந்து ஒருவனால் நீ விமர்சிக்கப்பட்டால்,\n\n\nநினைத்துக்கொள்\nநீ அவனை விட ஏதோ ஒன்றில்\n\nமுன்னாடி இருக்கிறாய் என்று..!\n\nநாய்-னாகுறைச்சுட்டு தான் இருக்கும். அதற்கெல்லாம் பதில் சொல்லணும்னு அவசியம் இல்லை... 😏 `"
         ]
 
+        animation_interval = 5
+
+        animation_ttl = range(11)
+
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -54,16 +53,11 @@ async def _(event):
             await event.edit(animation_chars[i % 10])
 
 @borg.on(admin_cmd(pattern=r"(.*)"))
-
 async def _(event):
 
     if event.fwd_from:
 
         return
-
-    animation_interval = 0.1
-
-    animation_ttl = range(0, 11)
 
     input_str = event.pattern_match.group(1)
 
@@ -72,7 +66,7 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = [
-        
+
             "`Downloading File..`",
             "`File Downloaded....`",
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nFile Scanned... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
@@ -86,6 +80,10 @@ async def _(event):
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nTask: 01 of 01 Files Scanned...\n\nResult: No Virus Found...`"
         ]
 
+        animation_interval = 0.1
+
+        animation_ttl = range(11)
+
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
@@ -94,16 +92,11 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern=r"(.*)"))
-
 async def _(event):
 
     if event.fwd_from:
 
         return
-
-    animation_interval = 5
-
-    animation_ttl = range(0, 11)
 
     input_str = event.pattern_match.group(1)
 
@@ -112,7 +105,7 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = [
-        
+
             "`Downloading File..`",
             "`File Downloaded....`",
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nFile Scanned... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
@@ -125,6 +118,10 @@ async def _(event):
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nFile Scanned... 100%\n█████████████████████████ `",
             "`Quick Heal Total Security Checkup\n\n\nSubscription: Pru User\nValid Until: 31/12/2099\n\nTask: 01 of 01 Files Scanned...\n\nResult:⚠️Virus Found⚠️\nMore Info: Torzan, Spyware, Adware`"
         ]
+
+        animation_interval = 5
+
+        animation_ttl = range(11)
 
         for i in animation_ttl:
 

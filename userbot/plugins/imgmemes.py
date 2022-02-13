@@ -173,19 +173,14 @@ async def nekobot(event):
 
 
 @borg.on(admin_cmd(pattern="cmm(?: |$)(.*)", outgoing=True))
-#@telebot.on(sudo_cmd(pattern="cmm(?: |$)(.*)", allow_sudo=True))
 async def nekobot(event):
     text = event.pattern_match.group(1)
     reply_to_id = event.message
     if event.reply_to_msg_id:
         reply_to_id = await event.get_reply_message()
     if not text:
-        if event.is_reply:
-            if not reply_to_id.media:
-                text = reply_to_id.message
-            else:
-                await event.edi("Give text for to write on banner, man")
-                return
+        if event.is_reply and not reply_to_id.media:
+            text = reply_to_id.message
         else:
             await event.edi("Give text for to write on banner, man")
             return

@@ -27,8 +27,7 @@ naam = str(ALIVE_NAME)
 
 BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
-G_BAN_LOGGER_GROUP = os.environ.get("G_BAN_LOGGER_GROUP", None)
-if G_BAN_LOGGER_GROUP:
+if G_BAN_LOGGER_GROUP := os.environ.get("G_BAN_LOGGER_GROUP", None):
     G_BAN_LOGGER_GROUP = int(G_BAN_LOGGER_GROUP)
 
 @borg.on(admin_cmd(pattern="fstat ?(.*)"))
@@ -53,7 +52,7 @@ async def _(event):
             try:
                 await conv.send_message("/start")
                 await conv.get_response()
-                await conv.send_message("/fedstat " + sysarg)
+                await conv.send_message(f'/fedstat {sysarg}')
                 audio = await conv.get_response()
                 if "Looks like" in audio.text:
                     await audio.click(0)
@@ -81,7 +80,7 @@ async def _(event):
         try:
             await conv.send_message("/start")
             await conv.get_response()
-            await conv.send_message("/fedinfo " + sysarg)
+            await conv.send_message(f'/fedinfo {sysarg}')
             audio = await conv.get_response()
             await ok.edit(audio.text + "\n\nFedInfo Excracted by TamilBot")
         except YouBlockedUserError:
@@ -103,23 +102,12 @@ async def _(event):
                 await event.delete()
             except YouBlockedUserError:
                 await event.edit("**Error:** `unblock` @MissRose_bot `and retry!")
-    elif "@" in sysarg:
+    elif "@" in sysarg or "" in sysarg:
         async with borg.conversation(bots) as conv:
             try:
                 await conv.send_message("/start")
                 await conv.get_response()
-                await conv.send_message("/info " + sysarg)
-                audio = await conv.get_response()
-                await borg.send_message(event.chat_id, audio.text)
-                await event.delete()
-            except YouBlockedUserError:
-                await event.edit("**Error:** `unblock` @MissRose_Bot `and try again!")
-    elif "" in sysarg:
-        async with borg.conversation(bots) as conv:
-            try:
-                await conv.send_message("/start")
-                await conv.get_response()
-                await conv.send_message("/info " + sysarg)
+                await conv.send_message(f'/info {sysarg}')
                 audio = await conv.get_response()
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
@@ -157,10 +145,7 @@ async def _(event):
     reason = event.pattern_match.group(1)
     if event.reply_to_msg_id:
         r = await event.get_reply_message()
-        if r.forward:
-            r_from_id = r.forward.from_id or r.from_id
-        else:
-            r_from_id = r.from_id
+        r_from_id = r.forward.from_id or r.from_id if r.forward else r.from_id
         await borg.send_message(
             G_BAN_LOGGER_GROUP,
             "/gban [user](tg://user?id={}) {}".format(r_from_id, reason),
